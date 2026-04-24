@@ -18,17 +18,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      exception = nil
-      begin
-        raise "Test error"
-      rescue => e
-        exception = e
-      end
-      if exception
-        raise exception
-      else
-        render json: @user, status: :created, location: @user
-      end
+      render json: @user, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
