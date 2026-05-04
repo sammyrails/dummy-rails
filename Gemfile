@@ -31,6 +31,7 @@ gem "bootsnap", require: false
 
 gem "sidekiq", "~> 7.0"
 gem "tracelit", path: "../../sdk/ruby/tracelit-sdk"
+gem "dotenv-rails", "~> 3.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

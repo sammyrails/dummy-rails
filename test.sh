@@ -2,6 +2,13 @@
 
 BASE="http://localhost:3001"
 
+# Load environment variables from .env if present
+if [ -f "$(dirname "$0")/.env" ]; then
+  set -a
+  source "$(dirname "$0")/.env"
+  set +a
+fi
+
 echo "=== Creating users ==="
 curl -s -X POST $BASE/users \
   -H "Content-Type: application/json" \
@@ -49,7 +56,6 @@ echo ""
 echo "Done. Wait 5 seconds then check ClickHouse."
 
 
-# TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTE2Yjc3NjUtMGI0YS00N2U2LWIzZmUtNDhjOWRkNWRmNDFiIiwiZW1haWwiOiJtcnNhbW55bmduQGdtYWlsLmNvbSIsImlzcyI6InRyYWNlbGl0Iiwic3ViIjoiOTE2Yjc3NjUtMGI0YS00N2U2LWIzZmUtNDhjOWRkNWRmNDFiIiwiZXhwIjoxNzc2NzkzNzc2LCJpYXQiOjE3NzY3NzU3NzZ9.eb1YdMBfoTMUJljA7HynNJbz7gTsyhxmVWBBKT-yF8Y"
 
 # echo "=== SERVICES ==="
 # curl -s "http://localhost:8080/api/v1/observability/services" \
