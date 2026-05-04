@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get "simulate/unauthorized",        to: "errors#unauthorized"
   get "simulate/forbidden",           to: "errors#forbidden"
+  get "simulate/bad_request",         to: "errors#bad_request"
   get "simulate/service_unavailable", to: "errors#service_unavailable"
 
 

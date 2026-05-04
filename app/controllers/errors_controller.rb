@@ -11,12 +11,29 @@ class ErrorsController < ApplicationController
            status: :forbidden
   end
 
+  # 422 - raises an ArgumentError deep in the call stack (produces a real stack trace)
+  def bad_request
+    parse_request_payload
+  end
+
   # 503 - simulates a downstream dependency blowing up with a real stack trace
   def service_unavailable
     simulate_database_call
   end
 
   private
+
+  def parse_request_payload
+    validate_schema
+  end
+
+  def validate_schema
+    coerce_types
+  end
+
+  def coerce_types
+    raise ArgumentError, "Invalid value for field 'amount': expected Integer, got \"abc\""
+  end
 
   def simulate_database_call
     fetch_from_cache
