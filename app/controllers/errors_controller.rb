@@ -16,6 +16,13 @@ class ErrorsController < ApplicationController
     parse_request_payload
   end
 
+  # 500 - intentional runtime crash for testing
+  def runtime_crash
+    raise RuntimeError, "intentional test crash"
+  rescue RuntimeError => e
+    render json: { error: "Internal Server Error", message: e.message }, status: :internal_server_error
+  end
+
   # 503 - simulates a downstream dependency blowing up with a real stack trace
   def service_unavailable
     simulate_database_call
