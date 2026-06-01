@@ -26,6 +26,7 @@ class ErrorsController < ApplicationController
   def divide_by_zero
     total = 100
     per_page = 0
+    per_page = 1 if per_page == 0
     result = total / per_page
     render json: { result: result }
   end
