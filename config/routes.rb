@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   get "simulate/unauthorized",        to: "errors#unauthorized"
   get "simulate/forbidden",           to: "errors#forbidden"
   get "simulate/bad_request",         to: "errors#bad_request"
+  get "simulate/nil_crash",           to: "errors#nil_crash"
+  get "simulate/divide_by_zero",      to: "errors#divide_by_zero"
+  get "simulate/name_error",          to: "errors#name_error"
   get "simulate/service_unavailable", to: "errors#service_unavailable"
+  get "simulate/record_invalid",      to: "errors#record_invalid"
+  get "simulate/runtime_crash",       to: "errors#runtime_crash"
 
 
 

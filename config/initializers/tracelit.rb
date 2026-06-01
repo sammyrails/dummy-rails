@@ -3,6 +3,6 @@ Tracelit.configure do |config|
   config.service_name = ENV["TRACELIT_SERVICE_NAME"]
   config.environment  = ENV["TRACELIT_ENVIRONMENT"]
   config.sample_rate  = 1.0
-  config.enabled      = true
+  config.enabled      = !defined?(Rails::Console)
   config.endpoint     = ENV["TRACELIT_ENDPOINT"]
 end

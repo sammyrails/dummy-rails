@@ -16,12 +16,49 @@ class ErrorsController < ApplicationController
     parse_request_payload
   end
 
+  # NoMethodError - calling a method on nil
+  def nil_crash
+    user = nil
+    user.email.upcase
+  end
+
+  # ZeroDivisionError - arithmetic blow-up
+  def divide_by_zero
+    total = 100
+    per_page = 0
+    result = total / per_page
+    render json: { result: result }
+  end
+
+  # NameError - referencing an undefined constant deep in a call chain
+  def name_error
+    load_config
+  end
+
   # 503 - simulates a downstream dependency blowing up with a real stack trace
   def service_unavailable
     simulate_database_call
   end
 
+  # ActiveRecord::RecordInvalid - validation failure raised via create!
+  def record_invalid
+    User.create!(email: nil)
+  end
+
+  # RuntimeError - unhandled crash, should trigger a Tracelit incident
+  def runtime_crash
+    raise RuntimeError, "intentional test crash"
+  end
+
   private
+
+  def load_config
+    build_settings
+  end
+
+  def build_settings
+    AppSettings::Config.fetch(:timeout)
+  end
 
   def parse_request_payload
     validate_schema
